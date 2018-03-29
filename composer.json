@@ -1,0 +1,19 @@
+{
+    "name": "kreateyou/pesamate",
+    "description": "Pesamate Money Transfer Limited",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pesamate Money Transfer Limited",
+            "email": "info@pesamate.com"
+        }
+    ],
+    "require": {        
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pesamate\\": "src/" 
+        }
+    }
+}
