@@ -2,12 +2,13 @@
 namespace Pesamate\Interfaces;
 
 use Pesamate\Lib\Request;
+use Exception;
 use GuzzleHttp\Client;
 abstract class Endpoint{
 	private $request;
 	protected $client;
-	// public static $base_uri = "https://www.pesamate.com/api/";
-	public static $base_uri = "http://localhost:8000/api/";
+	public static $base_uri = "https://www.pesamate.com/api/";
+	// public static $base_uri = "http://localhost:8000/api/";
 	public function __construct(Request $request)
 	{
 		$this->request = $request;
@@ -37,7 +38,7 @@ abstract class Endpoint{
 			}
 			unset($params['notifier']);
            $params = $this->_clean($params);
-        
+           
 		   $data = ['body' => json_encode($params)]; 
 		  
 		   $response = $this->client->post($this->getRoute(),$data); 
@@ -84,27 +85,36 @@ abstract class Endpoint{
 
 			return $data_;
 		}
-		throw new Exception("Error Processing Request Empty Data", 1);
+		//throw new Exception("Error Processing Request Empty Params", 1);
 		
 	}
 	protected function handleError($e)
 	{
-        $error=null;
-		if($e->getResponse()->getStatusCode()==404){
-			$error = new \Exception($this->getRoute()." Endpoint not Found", 404);
+		
+      
+        if(!method_exists($e, "getResponse")){
+		
+			$this->processErrors($e->getMessage(),$e->getCode());
+			
+		}elseif($e->getResponse()->getStatusCode()==404){
+			$this->processErrors($this->getRoute()." Endpoint not Found", 404);
 			
 			
 		}else{
 			$json = json_decode($e->getResponse()->getBody()->getContents());
-			$error = new \Exception($json->message, $e->getResponse()->getStatusCode());
+			$this->processErrors($json->message, $e->getResponse()->getStatusCode());
 			
 		}
 
 
+		
+	}
+	public function processErrors($message,$code)
+	{
 		if($this->request->errorCallback){
-			call_user_func_array($this->request->errorCallback, [$error]);
+			call_user_func_array($this->request->errorCallback, [new Exception($message,$code)]);
 		}else{
-           throw $error;
+           throw new Exception($message,$code);
            
 		}
 	}

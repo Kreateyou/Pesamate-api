@@ -1,6 +1,7 @@
 <?php
 namespace Pesamate\Lib;
 use Closure;
+use Exception;
 use Pesamate\Models\Order;
 use Pesamate\Models\Customer;
 use Pesamate\Models\Account;
@@ -25,6 +26,11 @@ class Request{
   public function __construct(Auth $auth)
   {
   	$this->auth = $auth;
+  }
+  public function resetSession($token)
+  {
+    $this->auth = Auth::withToken($token);
+     return $this;
   }
   public function paymentForOrder(Order $order){
   	$this->order = $order;
@@ -115,7 +121,7 @@ class Request{
       return new $c($this);
     }
     $x = ucfirst($method);
-    throw new Exception("$method Endpoint dont exists", 1);
+    throw new Exception("$c Endpoint dont exists", 1);
     
   }
 }

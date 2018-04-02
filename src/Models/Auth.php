@@ -21,6 +21,7 @@ class Auth{
 	private function setToken($token)
 	{
 		$this->token = $token;
+		return $this;
 	}
 	public function setTokenSession(TokenSession $session)
 	{
@@ -30,8 +31,12 @@ class Auth{
 	static function withToken($token){
        return self::getInstance()->setToken($token);
 	}
-	static function withCredentials($login,$password){
-      return self::getInstance()->setCredentials($login,$password);
+	static function withCredentials($login,$password,$session=null){
+		$inst = self::getInstance();
+		if(!is_null($session)){
+		  $inst->setTokenSession($session);
+		}
+      return $inst->setCredentials($login,$password);
 	}
 	static function getInstance(){
         if(is_null(self::$instance)){
@@ -41,6 +46,10 @@ class Auth{
 	}
 	protected function getToken(){
       
+	  	if(!is_null($this->session)){
+	      $value = $this->session->get("token");
+	      if(!is_null($value)) $this->setToken($value); return;
+	  	}
       $client = new Client(['base_uri' => Endpoint::$base_uri]);
       try {
       	$response = $client->post("authenticate",['form_params'=>['login'=>$this->login,'password'=>$this->password]]);
