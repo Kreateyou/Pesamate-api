@@ -109,7 +109,7 @@ abstract class Endpoint{
 
 		
 	}
-	public function processErrors($message,$code)
+	public function processErrors($message,$code=901)
 	{
 		if($this->request->errorCallback){
 			call_user_func_array($this->request->errorCallback, [new Exception($message,$code)]);
