@@ -80,8 +80,21 @@ class Request{
   * @param $custom_data to be passed alongside this ping
   * Note this will add a list of pingable url including one on the server
   **/
-  public function thenPing($urls,$method="post",$custom_data=[]){
-  	$this->callback = new CallbackInfo($urls,false,$method,$custom_data);
+  public function thenPing($urls,$method="post",$custom_data=[],$error_url="",$override_server=false){
+  	$this->callback = new CallbackInfo($urls,$override_server,$method,$custom_data);
+    $this->onErrorPing($error_url);
+    return $this;
+  }
+
+  /**
+  * Allow the Pesamate Callback engine to ping back the following url
+  * @param $urls array of urls or single url
+  * @param method method type that your callback accepts
+  * @param $custom_data to be passed alongside this ping
+  * Note this will add a list of pingable url including one on the server
+  **/
+  protected function onErrorPing($url){
+    $this->callback->addErrorUrl($url);
     return $this;
   }
   /**

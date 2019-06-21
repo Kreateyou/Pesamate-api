@@ -1,4 +1,5 @@
 <?php
+//Allow payment from wallet
 require "vendor/autoload.php";
 use Pesamate\Models\Auth;
 use Pesamate\Interfaces\TokenSession;
@@ -26,8 +27,8 @@ $callback=function($reponse){
 // $auth = Auth::withCredentials("info@pesamate.com","nifty");
 $auth = Auth::withCredentials("emwangi.g@gmail.com","nifty");
 
-$customer2  = new Customer("Virginia Nduta Mwaniki","virg@gmail.com","254720538079");
-$customer  = new Customer("Elijah Mwangi","emwangi.g@gmail.com","254723681977");
+$customer2  = new Customer("Virg Iniah","virg@pesamate.com","2547XXXXXXXX");
+$customer  = new Customer("Elijah Mwangi","info@pesamate.com","2547XXXXXXXX");
 $account   = new Account();
 $account->fromAccount("5000349987401903");
 $payment = new Payment(10);

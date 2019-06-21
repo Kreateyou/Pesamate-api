@@ -5,7 +5,8 @@ namespace Pesamate\Models;
 */
 class Payment
 {
-   
+    
+
 	public $allocated_amount;
 	public $default_currency="KES";
 	public $note;
