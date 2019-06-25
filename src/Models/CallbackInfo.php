@@ -6,12 +6,10 @@ class CallbackInfo{
 	public $overideServer=false;
 	public $accepts = "post";
     public $custom_data=[];
-    public $error_url="";
-	public function __construct($urls,$overideServer,$accepts="post",$cbdata=[],$error_url="")
+	public function __construct($urls,$overideServer,$accepts="post",$cbdata=[])
     {
     	$this->overideServer = $overideServer;
     	$this->urls = $urls;
-        $this->error_url = $error_url;
         $this->withCustomData($cbdata);
         $this->accepts = $accepts;
     }
@@ -26,9 +24,5 @@ class CallbackInfo{
     public function withCustomData(array $data){
         $this->custom_data = $data;
         return $this;
-    }
-    public function addErrorUrl($url='')
-    {
-        $this->error_url = $url;
     }
 }

@@ -50,18 +50,18 @@ class Account{
 	/**
 	* Identify the gateway to be used to request for payment
 	**/
-	public function withMpesaBulk()
+	public function withTigo()
 	{
 		$this->sub_gateway=null;
-		$this->gateway="mpesa_b2c";
+		$this->gateway="mpesa";
 		return $this;
 	}
 	/**
 	* Identify the gateway to be used to request for payment
 	**/
-	public function withTigo()
+	public function withMpesaBulk()
 	{
-		$this->sub_gateway=null;
+		$this->sub_gateway='b2c';
 		$this->gateway="mpesa";
 		return $this;
 	}

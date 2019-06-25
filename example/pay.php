@@ -24,7 +24,7 @@ $ecallback=function($reponse){
 $callback=function($reponse){
 	print_r($reponse);
 };
-// $auth = Auth::withCredentials("info@pesamate.com","nifty");
+
 $auth = Auth::withCredentials("emwangi.g@gmail.com","nifty");
 
 $customer2  = new Customer("Virg Iniah","virg@pesamate.com","2547XXXXXXXX");

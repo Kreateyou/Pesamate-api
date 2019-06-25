@@ -38,8 +38,6 @@ abstract class Endpoint{
 			}
 			unset($params['notifier']);
            $params = $this->_clean($params);
-
-          
            
 		   $data = ['body' => json_encode($params)]; 
 		  

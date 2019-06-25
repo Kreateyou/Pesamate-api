@@ -41,14 +41,14 @@ $callback=function($reponse){
 $auth = Auth::withCredentials("emwangi.g@gmail.com","nifty@20#");
 
 //Customer Information
-$customer  = new Customer("Virg Iniah","virg@pesamate.com","2547XXXXXXXX");
+$customer  = new Customer("Virg Iniah","virg@pesamate.com","25472368197700");
 //Account Information
 $account   = new Account();
 $account->fromAccount("5000142573073233")
         ->withMpesaBulk();
 
 //Payment Information
-$payment = new Payment(10);
+$payment = new Payment(20);
 $payment->for("Testing Mpesa B2C");
 
 Pesamate::requestBuilder($auth)         
@@ -57,6 +57,7 @@ Pesamate::requestBuilder($auth)
          ->to($customer)    
 	     ->onSuccess($callback)
 	     ->onError($ecallback)
+       ->thenPing("https://www.pesamate.com/api/z")
 	     ->BulkPay();  
 
 	     exit();
