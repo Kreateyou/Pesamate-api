@@ -41,7 +41,8 @@ $callback=function($reponse){
 $auth = Auth::withCredentials("emwangi.g@gmail.com","nifty@20#");
 
 //Customer Information
-$customer  = new Customer("Virg Iniah","virg@pesamate.com","25472368197700");
+$customer  = new Customer("Virg Iniah","virg@pesamate.com","254723681977");
+$customer  = new Customer("Abila M","virg@ab.com","254725720822");
 //Account Information
 $account   = new Account();
 $account->fromAccount("5000142573073233")
