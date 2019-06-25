@@ -42,7 +42,7 @@ $auth = Auth::withCredentials("emwangi.g@gmail.com","nifty@20#");
 
 //Customer Information
 $customer  = new Customer("Virg Iniah","virg@pesamate.com","254723681977");
-$customer  = new Customer("Abila M","virg@ab.com","254725720822");
+$customerw  = new Customer("Abila M","virg@ab.com","254725720822");
 //Account Information
 $account   = new Account();
 $account->fromAccount("5000142573073233")
@@ -55,7 +55,8 @@ $payment->for("Testing Mpesa B2C");
 Pesamate::requestBuilder($auth)         
          ->payment($payment)	
          ->fromAccount($account) 
-         ->to($customer)    
+         ->to($customer) 
+         ->to($customerw)     
 	     ->onSuccess($callback)
 	     ->onError($ecallback)
        ->thenPing("https://www.pesamate.com/api/z")
